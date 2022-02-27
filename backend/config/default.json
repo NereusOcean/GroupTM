@@ -1,0 +1,5 @@
+{
+	"serverPort":3001,
+	"dbUrl":"mongodb+srv://Nereus:159753852456N@cluster.r71zp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+	"privateKey": "somebody_once_told_me_the_world_is_gonna_roll_me"
+}
