@@ -4,6 +4,7 @@
 
 ## Использованные технологии
 Front сайта написан на языке програмирования JavaScript с использованием библиотек React, Redux, NodeJS, express, React-bootstrap.
+<br/>
 Backend написан на JavaScript по архитектуре REST. Используемая базза данных - mongoDB.
 
 ## Запуск
