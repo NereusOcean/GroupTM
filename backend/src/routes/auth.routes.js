@@ -1,5 +1,6 @@
 const Router = require("express");
 const User = require("../models/User");
+const Groups = require("../models/Groups")
 const bcrypt = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
@@ -7,9 +8,11 @@ const authMiddleWare = require("../middleware/auth.middleware");
 const {check, validationResult} = require("express-validator");
 const router = new Router();
 
+
 const passwordRule ={min: 3, max:16};
 const groupRule ={min:4,max:4};
-let admins = ["niki_5555@mail.ru", "admin@mail.ru"];
+let moderator = [ "admin@mail.ru"];
+let admin = ["niki_5555@mail.ru"];
 
 router.post('/registration', [
         check('email',"Uncorrect email").isEmail(),
@@ -34,10 +37,21 @@ router.post('/registration', [
         if(candidate){
             return res.status(400).json({message: `User with email ${email} alredy exist`});
         }
+        const candidateGroup = await Groups.findOne({nameGroup:group});
+        if(!candidateGroup){
+            return res.status(400).json({message: `There is no group with number ${group}`});
+        }
 
+     /*   const candidateSchedule = await User.findOne({group});
+        if(!candidateSchedule){
+            console.log("yep");
+
+        }
+        await schedule.setSchedule(Number(group));*/
         let role = 'user';
-        for(let i in admins){
-            email === admins[i]? role = 'admin': null;
+        for(let i in admin){
+            email === moderator[i]? role = 'moderator': null;
+            email === admin[i]? role ="admin":null;
         }
 
 
@@ -131,6 +145,7 @@ router.get('/getUsers',
                     rowEl["id"] = el["_id"];
                     rowEl["email"] = el["email"];
                     rowEl["role"] = el["role"];
+                    rowEl["group"] = el["group"];
                     rowData.push(rowEl);
                 })
             });

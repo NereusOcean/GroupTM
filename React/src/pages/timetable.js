@@ -7,17 +7,22 @@ import {CustomTable} from "../components/scheduleTable";
 let nextTypeSchedule = "Расписание от старосты";
 
 async function getSchedule(group){
-   let res = await axios.get("/api/schedule/getSchedule");
-   let schedule = [];
-   for(let i in res.data){
-       if(res.data[i].fullNumber === group)  schedule.push(res.data[i]);
-   }
-   return schedule;
+   let res = await axios.post("/api/schedule/setScheduleFromLeti",{group});
+   // let schedule = [];
+   // for(let i in res.data){
+   //     if(res.data[i].fullNumber === group)  schedule.push(res.data[i]);
+   // }
+    console.log(res.data.message);
 }
 
 
 export function LessonTable(){
     const [letiSchedule, setLetiSchedule] = useState(true);
+
+    const setDbGroup = () => {
+        getSchedule(6781);
+    }
+   // console.log(getSchedule(9382));
 
     const changeSchedule = () => {
         if(letiSchedule === true){
@@ -35,9 +40,11 @@ export function LessonTable(){
     return(
         <>
             <Button onClick={changeSchedule} style={{margin:"10px"}}>{nextTypeSchedule}</Button>
+            <Button onClick={setDbGroup}>sdsdsd</Button>
             {letiSchedule &&
                <CustomTable/>
             }
+
             <div style={{display: "flex",
                 justifyContent: "center"}}>
                 {!letiSchedule && <div style={{width:"80%"}}>

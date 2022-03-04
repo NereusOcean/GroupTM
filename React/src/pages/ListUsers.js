@@ -17,6 +17,11 @@ const headers = [
         sort: true
     },
     {
+        dataField: "group",
+        text: "Group",
+        sort: true
+    },
+    {
         dataField: "role",
         text: "Role",
         sort: true
@@ -40,16 +45,17 @@ function makeColumns(object){
     for(let i in object){
         let input = (<select id={`${object[i].email}`} onChange={changeRole}>
             <option value={object[i].role}>{object[i].role}</option>
-            <option value={object[i].role === 'admin'? "user":"admin"}>{object[i].role === 'admin'? "user":"admin"}</option>
+            <option value={object[i].role === 'moderator'? "user":"moderator"}>{object[i].role === 'moderator'? "user":"moderator"}</option>
         </select>);
         if(myEmail === object[i].email){
             myRow = Number(i);
-            column.push({id: i, email: myEmail, role: object[i].role, });
+            column.push({id: i, email: myEmail,group:object[i].group, role: object[i].role, });
         }else{
-            column.push({id: i, email: object[i].email, role: input});
+            column.push({id: i, email: object[i].email,group:object[i].group, role: object[i].role === 'admin'? "admin":input});
         }
 
     }
+    console.log(object);
     return column;
 }
 

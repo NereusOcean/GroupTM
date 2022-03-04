@@ -81,25 +81,25 @@ label {
 }
 
 a {
+  margin-right: 25px;
   width: auto!important;
   height: auto!important;
-  color: #f6f4e6;
+  color: #f6f4e6!important;
   text-decoration: none!important;
   font-size: 1em;
   text-transform: uppercase;
   font-weight: 500;
   display: inline-block;
-  width: 80px;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
 
 a:hover {
-  color: #fddb3a;
+  color: #917b10 !important;
 }
 
 .active{
-  color: #fddb3a;
+  color: #917b10!important;
 }
 
 .app{
@@ -133,4 +133,9 @@ a:hover {
 
 .content{
   padding: 5px;
+}
+
+.logOut{
+  background-color: #917b10;
+  margin-left: 15px;
 }
