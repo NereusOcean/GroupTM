@@ -17,8 +17,6 @@ import {ListUsers} from "./pages/ListUsers";
 
 function App() {
 
-    const isAuth = useSelector(state => state.user.isAuth);
-
     const dispatch = useDispatch();
     useEffect(()=>{
         if(localStorage.getItem('token')){
@@ -26,8 +24,9 @@ function App() {
         }
 
     }, [])
-
-    const isAdmin = useSelector(state => state.user.currentUser.role) === "admin";
+    const isAuth = useSelector(state => state.user.isAuth);
+    const roleUser= useSelector(state => state.user.currentUser.role)
+    const isModerator = (roleUser  === "moderator" || roleUser === "admin");
 
   return (
     <div className="App">
@@ -39,7 +38,7 @@ function App() {
                 {isAuth &&      <Route path='/lessons' element={<LessonTable/>}/>}
                 {isAuth &&     <Route path='/materials' element={<Materials/>}/>}
                 {isAuth &&     <Route path='/notes' element={<Notes/>}/>}
-                {isAdmin &&     <Route path='/listUsers' element={<ListUsers/>}/>}
+                {isModerator && isAuth &&     <Route path='/listUsers' element={<ListUsers/>}/>}
                 <Route path='/login' element={<Auth />}/>
                 <Route path='/registration' element={<RegistrationPage />}/>
                 <Route path='*' element={ErrorPage(404)}/>

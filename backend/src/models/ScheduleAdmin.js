@@ -1,6 +1,6 @@
 const {Schema, model} = require("mongoose");
 
-const ScheduleLeti = new Schema({
+const ScheduleAdmin = new Schema({
     dateUpdate: {type: String, required: true},
     group:{type: String, required: true},
     time: {type: String},
@@ -12,4 +12,4 @@ const ScheduleLeti = new Schema({
 
 })
 
-module.exports = model('ScheduleLeti',ScheduleLeti);
+module.exports = model('ScheduleAdmin',ScheduleAdmin);

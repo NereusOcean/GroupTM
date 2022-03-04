@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a459726f.css",
+    "main.js": "/static/js/main.47bf22ee.js",
+    "static/media/logo-krug-gold.png": "/static/media/logo-krug-gold.b681a581da63c47c2985.png",
+    "index.html": "/index.html",
+    "main.a459726f.css.map": "/static/css/main.a459726f.css.map",
+    "main.47bf22ee.js.map": "/static/js/main.47bf22ee.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a459726f.css",
+    "static/js/main.47bf22ee.js"
+  ]
+}

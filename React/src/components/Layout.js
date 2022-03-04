@@ -2,11 +2,12 @@ import {NavLink, Outlet} from "react-router-dom";
 import {Button, Container, Nav, Navbar} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../reducers/userReducer";
-import logo from "../img/logo192.png";
+import logo from "../img/logo-krug-gold.png";
 const Layout = () =>{
 
     const isAuth = useSelector(state => state.user.isAuth);
-    const isAdmin = useSelector(state => state.user.currentUser.role) === "admin";
+    const roleUser= useSelector(state => state.user.currentUser.role)
+    const isModerator = (roleUser  === "moderator" || roleUser === "admin");
     const dispatch = useDispatch();
 
     return(
@@ -15,24 +16,25 @@ const Layout = () =>{
                 {/*<Container>*/}
                     {/*<header className={"App-header"}>*/}
                     <Navbar.Brand>
-                        <NavLink to={"/"}><img src={logo} width={"40px"} height={"40px"}/></NavLink>
+                        <NavLink to={"/"}><img src={logo} width={"60px"} height={"60px"}/></NavLink>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
 
                     <Navbar.Collapse  id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link><NavLink to={"/news"}>Новости</NavLink></Nav.Link>
-                            <Nav.Link><NavLink to={"/lessons"}>Распиание</NavLink></Nav.Link>
-                            <Nav.Link><NavLink to={"/materials"}>Материалы</NavLink></Nav.Link>
-                            <Nav.Link><NavLink to={"/notes"}>Заметки</NavLink></Nav.Link>
-                            {isAdmin &&<Nav.Link><NavLink to={"/listUsers"}>Пользователи</NavLink></Nav.Link>}
-                            {!isAuth && <Nav.Link><NavLink to={"/login"}>Войти</NavLink></Nav.Link>}
-                            {!isAuth && <Nav.Link><NavLink to={"/registration"}>Регистрация</NavLink></Nav.Link>}
+                            <NavLink to={"/news"}>Новости</NavLink>
+                            <NavLink to={"/lessons"}>Распиание</NavLink>
+                            <NavLink to={"/materials"}>Материалы</NavLink>
+                            <NavLink to={"/notes"}>Заметки</NavLink>
+                            {isModerator &&<NavLink to={"/listUsers"}>Пользователи</NavLink>}
+
                         </Nav>
                         <Nav>
                             {/*<div className={"auth"}>*/}
+                            {!isAuth && <NavLink to={"/login"}>Войти</NavLink>}
+                            {!isAuth && <NavLink to={"/registration"}>Регистрация</NavLink>}
                                 {isAuth && <div style={{color:"white"}}>{localStorage.getItem('email')}</div>}
-                                {isAuth && <Button onClick={() => dispatch(logout())}>Выйти</Button>}
+                                {isAuth && <Button className={"logOut"} onClick={() => dispatch(logout())}>Выйти</Button>}
                             {/*</div>*/}
                         </Nav>
                     </Navbar.Collapse>
